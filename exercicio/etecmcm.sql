@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Ago-2024 às 14:29
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.2
+-- Tempo de geração: 26-Ago-2024 às 16:00
+-- Versão do servidor: 10.4.32-MariaDB
+-- versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `etecmcm`
 --
+CREATE DATABASE IF NOT EXISTS `etecmcm` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `etecmcm`;
 
 -- --------------------------------------------------------
 
@@ -32,16 +34,14 @@ CREATE TABLE `alunos` (
   `nome` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `fk_cursos_id_curso` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `alunos`
 --
 
 INSERT INTO `alunos` (`id`, `nome`, `email`, `fk_cursos_id_curso`) VALUES
-(1, 'Fellipe', 'fellipe@email.com', 1),
-(2, 'Thuany', 'thuany@email.com', 4),
-(3, 'Nicolas', 'nicolas@email.com', 1);
+(3, 'LULUZINHA', 'lulu@email.com', 3);
 
 -- --------------------------------------------------------
 
@@ -52,17 +52,18 @@ INSERT INTO `alunos` (`id`, `nome`, `email`, `fk_cursos_id_curso`) VALUES
 CREATE TABLE `cursos` (
   `id_curso` int(11) NOT NULL,
   `nome_curso` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `cursos`
 --
 
 INSERT INTO `cursos` (`id_curso`, `nome_curso`) VALUES
-(1, 'Informática'),
-(2, 'Química'),
-(3, 'Administração'),
-(4, 'Recursos Humanos');
+(3, 'ADMINISTRAÇÃO'),
+(4, 'CONTABILIDADE'),
+(5, 'VETERINÁRIA'),
+(6, 'CULINÁRIA'),
+(7, 'GASTRONOMIA');
 
 --
 -- Índices para tabelas despejadas
@@ -95,7 +96,7 @@ ALTER TABLE `alunos`
 -- AUTO_INCREMENT de tabela `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id_curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para despejos de tabelas
@@ -105,7 +106,7 @@ ALTER TABLE `cursos`
 -- Limitadores para a tabela `alunos`
 --
 ALTER TABLE `alunos`
-  ADD CONSTRAINT `FK_alunos_2` FOREIGN KEY (`fk_cursos_id_curso`) REFERENCES `cursos` (`id_curso`);
+  ADD CONSTRAINT `FK_alunos_2` FOREIGN KEY (`fk_cursos_id_curso`) REFERENCES `cursos` (`id_curso`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
